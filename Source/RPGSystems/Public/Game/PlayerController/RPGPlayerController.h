@@ -19,9 +19,11 @@ public:
 
 	ARPGPlayerController();
 
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
 private:
 
-	UPROPERTY(BlueprintReadOnly, meta=(AllowPrivateAccess=true))
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta=(AllowPrivateAccess=true), Replicated)
 	TObjectPtr<UInventoryComponent> InventoryComponent;
 	
 };
