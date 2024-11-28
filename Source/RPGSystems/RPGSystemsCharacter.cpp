@@ -14,6 +14,7 @@
 #include "AbilitySystem/RPGAbilitySystemComponent.h"
 #include "Data/CharacterClassInfo.h"
 #include "Libraries/RPGAbilitySystemLibrary.h"
+#include "AbilitySystem/Attributes/RPGAttributeSet.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
@@ -90,6 +91,7 @@ void ARPGSystemsCharacter::InitAbilityActorInfo()
 		if (IsValid(RPGAbilitySystemComp))
 		{
 			RPGAbilitySystemComp->InitAbilityActorInfo(RPGPlayerState, this);
+			BindCallbacksToDepencies();
 
 			if (HasAuthority())
 			{
@@ -116,6 +118,31 @@ void ARPGSystemsCharacter::InitClassDefaults()
 				RPGAbilitySystemComp->InitializeDefaultAttributes(SelectedClassInfo->DefaultAttributes);
 			}
 		}
+	}
+}
+
+void ARPGSystemsCharacter::BindCallbacksToDepencies()
+{
+	if (IsValid(RPGAbilitySystemComp) && IsValid(RPGAttributes))
+	{
+		RPGAbilitySystemComp->GetGameplayAttributeValueChangeDelegate(RPGAttributes->GetHealthAttribute()).AddLambda([this] (const FOnAttributeChangeData& Data)
+		{
+			OnHealthChanged(Data.NewValue, RPGAttributes->GetMaxHealth());
+		});
+		
+		RPGAbilitySystemComp->GetGameplayAttributeValueChangeDelegate(RPGAttributes->GetManaAttribute()).AddLambda([this] (const FOnAttributeChangeData& Data)
+		{
+			OnManaChanged(Data.NewValue, RPGAttributes->GetMaxMana());
+		});
+	}
+}
+
+void ARPGSystemsCharacter::BroadcastInitialValues()
+{
+	if (IsValid(RPGAttributes))
+	{
+		OnHealthChanged(RPGAttributes->GetHealth(), RPGAttributes->GetMaxHealth());
+		OnManaChanged(RPGAttributes->GetMana(), RPGAttributes->GetMaxMana());
 	}
 }
 

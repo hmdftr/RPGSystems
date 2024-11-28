@@ -47,6 +47,12 @@ public:
 	virtual void PossessedBy(AController* NewController) override;
 	virtual void OnRep_PlayerState() override;
 
+	UFUNCTION(BlueprintImplementableEvent)
+	void OnHealthChanged(float CurrentHealth, float MaxHealth);
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void OnManaChanged(float CurrentMana, float MaxMana);
+
 protected:
 
 
@@ -71,6 +77,10 @@ private:
 	
 	void InitAbilityActorInfo();
 	void InitClassDefaults();
+	void BindCallbacksToDepencies();
+
+	UFUNCTION(BlueprintCallable)
+	void BroadcastInitialValues();
 	
 public:
 
