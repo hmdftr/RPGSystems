@@ -76,6 +76,11 @@ void ARPGSystemsCharacter::OnRep_PlayerState()
 	InitAbilityActorInfo();
 }
 
+UAbilitySystemComponent* ARPGSystemsCharacter::GetAbilitySystemComponent() const
+{
+	return RPGAbilitySystemComp;
+}
+
 void ARPGSystemsCharacter::BeginPlay()
 {
 	Super::BeginPlay();
