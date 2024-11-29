@@ -56,6 +56,7 @@ void UInventoryComponent::AddItem(const FGameplayTag& ItemTag, int32 NumItems)
 		FString::Printf(TEXT("Server Item added to Inventory %s, qty: %d"), *ItemTag.ToString(), NumItems));
 
 	PackageInventory(CachedInventory);
+	InventoryPackagedDelegate.Broadcast(CachedInventory);
 }
 
 
@@ -135,6 +136,7 @@ void UInventoryComponent::ServerUseItem_Implementation(const FGameplayTag& ItemT
 void UInventoryComponent::OnRep_CachedInventory()
 {
 	ReconstructInventoryMap(CachedInventory);
+	InventoryPackagedDelegate.Broadcast(CachedInventory);
 }
 
 
@@ -152,5 +154,11 @@ FMasterItemDefinition UInventoryComponent::GetItemDefinitionByTag(const FGamepla
 	}
 
 	return FMasterItemDefinition();
+}
+
+
+TMap<FGameplayTag, int32> UInventoryComponent::GetInventoryTagMap()
+{
+	return InventoryTagMap;
 }
 
