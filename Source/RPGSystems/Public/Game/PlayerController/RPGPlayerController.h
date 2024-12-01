@@ -23,7 +23,6 @@ public:
 
 	ARPGPlayerController();
 
-	//Implement Inventory Interface
 	virtual UInventoryComponent* GetInventoryComponent_Implementation() override;
 	
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;

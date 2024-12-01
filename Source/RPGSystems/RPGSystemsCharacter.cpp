@@ -142,6 +142,8 @@ void ARPGSystemsCharacter::BindCallbacksToDepencies()
 	}
 }
 
+
+
 void ARPGSystemsCharacter::BroadcastInitialValues()
 {
 	if (IsValid(RPGAttributes))
@@ -150,6 +152,7 @@ void ARPGSystemsCharacter::BroadcastInitialValues()
 		OnManaChanged(RPGAttributes->GetMana(), RPGAttributes->GetMaxMana());
 	}
 }
+
 
 //////////////////////////////////////////////////////////////////////////
 // Input
@@ -188,6 +191,7 @@ void ARPGSystemsCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInpu
 		UE_LOG(LogTemplateCharacter, Error, TEXT("'%s' Failed to find an Enhanced Input component! This template is built to use the Enhanced Input system. If you intend to use the legacy system, then you will need to update this C++ file."), *GetNameSafe(this));
 	}
 }
+
 
 void ARPGSystemsCharacter::Move(const FInputActionValue& Value)
 {

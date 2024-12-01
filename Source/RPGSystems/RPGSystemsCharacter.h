@@ -56,6 +56,7 @@ public:
 	UFUNCTION(BlueprintImplementableEvent)
 	void OnManaChanged(float CurrentMana, float MaxMana);
 
+
 protected:
 
 
@@ -84,6 +85,7 @@ private:
 
 	UFUNCTION(BlueprintCallable)
 	void BroadcastInitialValues();
+
 	
 public:
 
