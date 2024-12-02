@@ -3,7 +3,7 @@ Tak Dirantai Bersama
 A Multiplayer RPG Adventure
 
 Overview
-Tak Dirantai Bersama is a multiplayer RPG game where players embark on a journey to reach the final destination. While inspired by the concept of chained attacks, this game focuses on individual skill and strategy.
+Tak Dirantai Bersama is a multiplayer RPG game where players embark on a journey to reach the final destination. While inspired by the concept of Chained Together, this game focuses on individual skill and strategy.
 
 Gameplay
 
