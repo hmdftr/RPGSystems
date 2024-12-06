@@ -4,10 +4,13 @@
 #include "Game/PlayerController/RPGPlayerController.h"
 
 #include "AbilitySystemBlueprintLibrary.h"
+#include "Game/PlayerState/RPGPlayerState.h"
+#include "Input/RPGSystemsInputComponent.h"
 #include "Inventory/InventoryComponent.h"
 #include "Net/UnrealNetwork.h"
 #include "UI/WidgetControllers/InventoryWidgetController.h"
 #include "UI/RPGSystemWidget.h"
+#include "AbilitySystem/RPGAbilitySystemComponent.h"
 
 ARPGPlayerController::ARPGPlayerController()
 {
@@ -15,6 +18,29 @@ ARPGPlayerController::ARPGPlayerController()
 
 	InventoryComponent = CreateDefaultSubobject<UInventoryComponent>("InventoryComponent");
 	InventoryComponent->SetIsReplicated(true);
+}
+
+void ARPGPlayerController::SetupInputComponent()
+{
+	Super::SetupInputComponent();
+
+	if (URPGSystemsInputComponent* RPGInputComp = Cast<URPGSystemsInputComponent>(InputComponent))
+	{
+		RPGInputComp->BindAbilityActions(RPGInputConfig, this, &ThisClass::AbilityInputPressed, &ThisClass::AbilityInputReleased );
+	}
+}
+
+URPGAbilitySystemComponent* ARPGPlayerController::GetRPGAbilitySystemComponent()
+{
+	if (!IsValid(RPGAbilitySystemComp))
+	{
+		if (const ARPGPlayerState* RPGPlayerState = GetPlayerState<ARPGPlayerState>())
+		{
+			RPGAbilitySystemComp = RPGPlayerState->GetRPGAbilitySystemComponent();
+		}
+	}
+	return RPGAbilitySystemComp;
+	
 }
 
 UInventoryComponent* ARPGPlayerController::GetInventoryComponent_Implementation()
@@ -55,3 +81,27 @@ void ARPGPlayerController::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>&
 
 	DOREPLIFETIME(ARPGPlayerController, InventoryComponent);
 }
+
+void ARPGPlayerController::BeginPlay()
+{
+	Super::BeginPlay();
+
+
+}
+
+void ARPGPlayerController::AbilityInputPressed(FGameplayTag InputTag)
+{
+	if (IsValid(GetAbilitySystemComponent()))
+	{
+		RPGAbilitySystemComp->AbilityInputPressed(InputTag);
+	}
+}
+
+void ARPGPlayerController::AbilityInputReleased(FGameplayTag InputTag)
+{
+	if (IsValid(GetRPGAbilitySystemComponent()))
+	{
+		RPGAbilitySystemComp->AbilityInputReleased(InputTag);
+	}
+}
+
