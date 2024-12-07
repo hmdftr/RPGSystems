@@ -61,9 +61,11 @@ public:
 	
 	void ReconstructInventoryMap(const FPackagedInventory& Inventory);
 
-
+	bool bOwnerLocallyControlled = false;
+	
 private:
 
+	
 	UPROPERTY(BlueprintReadOnly, meta = (AllowPrivateAccess=true))
 	TMap<FGameplayTag, int32> InventoryTagMap;
 

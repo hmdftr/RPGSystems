@@ -130,13 +130,20 @@ void UInventoryComponent::UseItem(const FGameplayTag& ItemTag, int32 NumItems)
 
 void UInventoryComponent::ServerUseItem_Implementation(const FGameplayTag& ItemTag, int32 NumItems)
 {
-	UseItem(ItemTag, NumItems);
+	if (InventoryTagMap.Contains(ItemTag))
+	{
+		UseItem(ItemTag, NumItems);
+	}
 }
 
 void UInventoryComponent::OnRep_CachedInventory()
 {
-	ReconstructInventoryMap(CachedInventory);
-	InventoryPackagedDelegate.Broadcast(CachedInventory);
+	if (bOwnerLocallyControlled)
+	{
+		ReconstructInventoryMap(CachedInventory);
+		InventoryPackagedDelegate.Broadcast(CachedInventory);
+	}
+	
 }
 
 

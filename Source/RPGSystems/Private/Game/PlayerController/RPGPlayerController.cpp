@@ -86,7 +86,10 @@ void ARPGPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
 
-
+	if (IsValid(InventoryComponent))
+	{
+		InventoryComponent->bOwnerLocallyControlled = IsLocalController();
+	}
 }
 
 void ARPGPlayerController::AbilityInputPressed(FGameplayTag InputTag)
