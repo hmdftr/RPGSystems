@@ -30,3 +30,8 @@ void ACharacterBase::InitClassDefaults()
 	//leave it for now
 }
 
+void ACharacterBase::BroadcastInitialValues()
+{
+	//leave it for now
+}
+
