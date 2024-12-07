@@ -19,3 +19,14 @@ void ACharacterBase::InitAbilityActorInfo()
 {
 	//leave it for now
 }
+
+void ACharacterBase::BindCallbacksToDependencies()
+{
+	//leave it for now
+}
+
+void ACharacterBase::InitClassDefaults()
+{
+	//leave it for now
+}
+

@@ -4,6 +4,7 @@
 #include "Character/EnemyBase.h"
 #include "AbilitySystem/RPGAbilitySystemComponent.h"
 #include "AbilitySystem/Attributes/RPGAttributeSet.h"
+#include "Chaos/Deformable/MuscleActivationConstraints.h"
 #include "Data/CharacterClassInfo.h"
 #include "Libraries/RPGAbilitySystemLibrary.h"
 
@@ -60,5 +61,17 @@ void AEnemyBase::InitClassDefaults()
 				RPGAbilitySystemComp->InitializeDefaultAttributes(SelectedClass->DefaultAttributes);
 			}
 		}
+	}
+}
+
+void AEnemyBase::BindCallbacksToDependencies()
+{
+	if (IsValid(RPGAbilitySystemComp) && IsValid(RPGAttributes))
+	{
+		RPGAbilitySystemComp->GetGameplayAttributeValueChangeDelegate(RPGAttributes->GetHealthAttribute()).AddLambda(
+			[this] (const FOnAttributeChangeData& Data)
+			{
+				OnHealthChanged(Data.NewValue, RPGAttributes->GetMaxHealth());
+			});
 	}
 }

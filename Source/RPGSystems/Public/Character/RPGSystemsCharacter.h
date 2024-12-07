@@ -49,11 +49,7 @@ public:
 
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 
-	UFUNCTION(BlueprintImplementableEvent)
-	void OnHealthChanged(float CurrentHealth, float MaxHealth);
-
-	UFUNCTION(BlueprintImplementableEvent)
-	void OnManaChanged(float CurrentMana, float MaxMana);
+	
 
 
 protected:
@@ -63,6 +59,8 @@ protected:
 	void Look(const FInputActionValue& Value);
 			
 	virtual void InitAbilityActorInfo() override;
+	virtual void BindCallbacksToDependencies() override;
+	virtual void InitClassDefaults() override;
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	virtual void NotifyControllerChanged() override;
 	virtual void BeginPlay() override;
@@ -75,9 +73,8 @@ private:
 	TObjectPtr<URPGAttributeSet> RPGAttributes;
 	
 	
-	void InitClassDefaults();
-	void BindCallbacksToDepencies();
 
+	
 	UFUNCTION(BlueprintCallable)
 	void BroadcastInitialValues();
 

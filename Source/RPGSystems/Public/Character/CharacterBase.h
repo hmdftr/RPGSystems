@@ -15,11 +15,19 @@ class RPGSYSTEMS_API ACharacterBase : public ACharacter
 public:
 	
 	ACharacterBase();
+	
+	UFUNCTION(BlueprintImplementableEvent)
+	void OnHealthChanged(float CurrentHealth, float MaxHealth);
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void OnManaChanged(float CurrentMana, float MaxMana);
 
 protected:
 	
 	virtual void BeginPlay() override;
 	virtual void InitAbilityActorInfo();
+	virtual void BindCallbacksToDependencies();
+	virtual void InitClassDefaults();
 
 	UPROPERTY(EditAnywhere, Category="Custom Values|Character Info")
 	FGameplayTag CharacterTag;

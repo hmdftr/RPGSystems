@@ -96,7 +96,7 @@ void ARPGSystemsCharacter::InitAbilityActorInfo()
 		if (IsValid(RPGAbilitySystemComp))
 		{
 			RPGAbilitySystemComp->InitAbilityActorInfo(RPGPlayerState, this);
-			BindCallbacksToDepencies();
+			BindCallbacksToDependencies();
 
 			if (HasAuthority())
 			{
@@ -126,7 +126,7 @@ void ARPGSystemsCharacter::InitClassDefaults()
 	}
 }
 
-void ARPGSystemsCharacter::BindCallbacksToDepencies()
+void ARPGSystemsCharacter::BindCallbacksToDependencies()
 {
 	if (IsValid(RPGAbilitySystemComp) && IsValid(RPGAttributes))
 	{
@@ -141,8 +141,6 @@ void ARPGSystemsCharacter::BindCallbacksToDepencies()
 		});
 	}
 }
-
-
 
 void ARPGSystemsCharacter::BroadcastInitialValues()
 {

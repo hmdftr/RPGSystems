@@ -27,6 +27,9 @@ protected:
 
 	virtual void BeginPlay() override;
 	virtual void InitAbilityActorInfo() override;
+	virtual void InitClassDefaults() override;
+	virtual void BindCallbacksToDependencies() override;
+
 
 private:
 
@@ -36,6 +39,5 @@ private:
 	UPROPERTY(BlueprintReadOnly, meta = (AllowPrivateAccess = true))
 	TObjectPtr<URPGAttributeSet> RPGAttributes;
 
-	void InitClassDefaults();
 };
 
