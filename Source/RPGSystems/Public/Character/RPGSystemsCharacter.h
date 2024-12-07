@@ -4,9 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "AbilitySystemInterface.h"
-#include "GameplayTagContainer.h"
-#include "GameFramework/Character.h"
-#include "Logging/LogMacros.h"
+#include "CharacterBase.h"
+//#include "Logging/LogMacros.h"
 #include "RPGSystemsCharacter.generated.h"
 
 class URPGAttributeSet;
@@ -20,7 +19,7 @@ struct FInputActionValue;
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
 
 UCLASS(config=Game)
-class ARPGSystemsCharacter : public ACharacter, public IAbilitySystemInterface
+class ARPGSystemsCharacter : public ACharacterBase, public IAbilitySystemInterface
 {
 	GENERATED_BODY()
 
@@ -63,11 +62,10 @@ protected:
 	void Move(const FInputActionValue& Value);
 	void Look(const FInputActionValue& Value);
 			
-//protected:
-
+	virtual void InitAbilityActorInfo() override;
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	virtual void NotifyControllerChanged() override;
-	virtual void BeginPlay();
+	virtual void BeginPlay() override;
 
 private:
 	UPROPERTY(BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
@@ -75,11 +73,8 @@ private:
 
 	UPROPERTY(BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<URPGAttributeSet> RPGAttributes;
-
-	UPROPERTY(EditAnywhere, Category="Custom Values|Character Info")
-	FGameplayTag CharacterTag;
 	
-	void InitAbilityActorInfo();
+	
 	void InitClassDefaults();
 	void BindCallbacksToDepencies();
 

@@ -1,7 +1,6 @@
-// Fill out your copyright notice in the Description page of Project Settings.
 
-#include "AbilitySystem/Abilities/RPGGameplayAbility.h"
 #include "AbilitySystem/RPGAbilitySystemComponent.h"
+#include "AbilitySystem/Abilities/RPGGameplayAbility.h"
 
 void URPGAbilitySystemComponent::AddCharacterAbilities(const TArray<TSubclassOf<UGameplayAbility>>& AbilitiesToGrant)
 {
