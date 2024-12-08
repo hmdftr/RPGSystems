@@ -4,6 +4,7 @@
 #include "Game/PlayerController/RPGPlayerController.h"
 
 #include "AbilitySystemBlueprintLibrary.h"
+#include "Blueprint/UserWidget.h"
 #include "Game/PlayerState/RPGPlayerState.h"
 #include "Input/RPGSystemsInputComponent.h"
 #include "Inventory/InventoryComponent.h"

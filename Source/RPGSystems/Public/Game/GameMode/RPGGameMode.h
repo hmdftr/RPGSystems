@@ -6,6 +6,7 @@
 #include "GameFramework/GameMode.h"
 #include "RPGGameMode.generated.h"
 
+class UProjectileInfo;
 class UCharacterClassInfo;
 /**
  * 
@@ -18,10 +19,14 @@ class RPGSYSTEMS_API ARPGGameMode : public AGameMode
 public:
 
 	UCharacterClassInfo* GetCharacterClassDefaultInfo() const;
+	UProjectileInfo* GetProjectileInfo() const;
 
 private:
 
 	UPROPERTY(EditDefaultsOnly, Category="Custom Values|Class Defaults")
 	TObjectPtr<UCharacterClassInfo> ClassDefaults;
+
+	UPROPERTY(EditDefaultsOnly, Category="Custom Values|Class Defaults")
+	TObjectPtr<UProjectileInfo> ProjectileInfo;
 	
 };

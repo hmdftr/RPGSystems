@@ -8,6 +8,7 @@
 #include "GameFramework/PlayerController.h"
 #include "Interfaces/InventoryInterface.h"
 #include "Input/RPGSystemsInputComponent.h"
+#include "GameplayTagContainer.h"
 #include "RPGPlayerController.generated.h"
 
 class URPGInputConfig;
